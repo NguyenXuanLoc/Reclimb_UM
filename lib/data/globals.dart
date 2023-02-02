@@ -1,0 +1,39 @@
+library app.globals;
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+String accessToken = '';
+String refreshToken = '';
+String lang = '';
+String avatar = '';
+String deviceId = '';
+int userId = 0;
+int accountId = 0;
+String deviceName = '';
+String deviceModel = '';
+String userName = '';
+String playlistId = '';
+String languageCode = '';
+String firstName = '';
+String lastName = '';
+bool isLogin = false;
+bool isTokenExpired = false;
+int timePackageRemaining = 0;
+int timeOut = 30;
+
+double contentPadding = 8.w;
+
+List<String> lHoldSetName = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L'
+];
