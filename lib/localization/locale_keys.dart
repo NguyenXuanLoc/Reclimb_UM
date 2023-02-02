@@ -33,7 +33,17 @@ abstract class LocaleKeys {
   static const notAvailable = 'notAvailable';
   static const pairing = 'pairing';
   static const connect = 'connect';
-  static const id ='id';
-  static const deviceName ='deviceName';
-  static const status ='status';
+  static const id = 'id';
+  static const deviceName = 'deviceName';
+  static const status = 'status';
+  static const reservation = 'reservation';
+  static const now = 'now';
+  static const next = 'next';
+  static const climber = 'climber';
+  static const logged = 'logged';
+  static const dragAndDropToChangeOrder = 'dragAndDropToChangeOrder';
+  static const loginWithPhone = 'loginWithPhone';
+  static const loginWithAccount = 'loginWithAccount';
+  static const createAnAccount = 'createAnAccount';
+  static const loginAs = 'loginAs';
 }

@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "code": "200",
+    "message": "OK"
+  },
+  "data": {
+    "id": "f09c3656-6a28-4e29-baeb-67c801a1144f",
+    "name": "Leo tuong 12",
+    "created": 1668055556,
+    "modified": 1668055556,
+    "user_id": 1,
+    "routes": [
+      {
+        "author_grade": 7,
+        "height": 12,
+        "id": "06dffa63-d209-45c6-bd78-7fdf9bb26367",
+        "has_conner": true,
+        "created_by_setter": false,
+        "user_grade": 4,
+        "name": "Route_example_02",
+        "user_grade_count": 0,
+        "created": 1671437520,
+        "visibility": 2,
+        "modified": 1671521586,
+        "popurlarity": 1500,
+        "holds": "[{'d': 'N', 'x': 4, 'y': 2, 'hid': 18, 'index': ''}, {'d': 'E', 'x': 6, 'y': 4, 'hid': 10, 'index': ''}, {'d': 'S', 'x': 4, 'y': 5, 'hid': 17, 'index': ''}, {'d': 'S', 'x': 3, 'y': 7, 'hid': 14, 'index': ''}, {'d': 'E', 'x': 4, 'y': 10, 'hid': 3, 'index': ''}, {'d': 'N', 'x': 3, 'y': 11, 'hid': 9, 'index': ''}, {'d': 'N', 'x': 3, 'y': 13, 'hid': 20, 'index': ''}, {'d': 'S', 'x': 2, 'y': 14, 'hid': 16, 'index': ''}, {'d': 'N', 'x': 6, 'y': 16, 'hid': 15, 'index': ''}, {'d': 'S', 'x': 3, 'y': 17, 'hid': 13, 'index': ''}, {'d': 'N', 'x': 3, 'y': 20, 'hid': 10, 'index': ''}, {'d': 'N', 'x': 5, 'y': 21, 'hid': 8, 'index': ''}, {'d': 'S', 'x': 4, 'y': 18, 'hid': 2, 'index': ''}, {'d': 'N', 'x': 2, 'y': 25, 'hid': 19, 'index': ''}, {'d': 'E', 'x': 3, 'y': 27, 'hid': 7, 'index': ''}, {'d': 'S', 'x': 4, 'y': 24, 'hid': 11, 'index': ''}, {'d': 'N', 'x': 4, 'y': 30, 'hid': 5, 'index': ''}, {'d': 'E', 'x': 2, 'y': 32, 'hid': 1, 'index': ''}, {'d': 'N', 'x': 5, 'y': 33, 'hid': 5, 'index': ''}, {'d': 'N', 'x': 5, 'y': 29, 'hid': 20, 'index': ''}, {'d': 'N', 'x': 1, 'y': 35, 'hid': 11, 'index': ''}, {'d': 'N', 'x': 3, 'y': 36, 'hid': 19, 'index': ''}, {'d': 'S', 'x': 6, 'y': 38, 'hid': 1, 'index': ''}, {'d': 'S', 'x': 9, 'y': 40, 'hid': 9, 'index': ''}, {'d': 'N', 'x': 8, 'y': 36, 'hid': 15, 'index': ''}, {'d': 'W', 'x': 8, 'y': 39, 'hid': 21, 'index': ''}, {'d': 'N', 'x': 8, 'y': 43, 'hid': 16, 'index': ''}, {'d': 'N', 'x': 10, 'y': 44, 'hid': 10, 'index': ''}, {'d': 'N', 'x': 10, 'y': 42, 'hid': 17, 'index': ''}, {'d': 'E', 'x': 9, 'y': 46, 'hid': 1, 'index': ''}]",
+        "user_id": 21,
+        "published": true,
+        "status": 0,
+        "playlist_in": true,
+        "favourite_in": false,
+        "user_profile": {
+          "first_name": "Emmanuel",
+          "height": null,
+          "gender": "male",
+          "last_name": "KANT",
+          "favorite_route_grade": 0,
+          "role": "user",
+          "account_id": 21,
+          "username": null
+        }
+      },
+      {
+        "author_grade": 12,
+        "height": 12,
+        "id": "b55882ea-f17b-4328-9de8-ff036bcea1ac",
+        "has_conner": true,
+        "created_by_setter": false,
+        "user_grade": 0,
+        "name": "Without hold",
+        "user_grade_count": 0,
+        "created": 1671503499,
+        "visibility": 2,
+        "modified": 1671503499,
+        "popurlarity": 0,
+        "holds": "[]",
+        "user_id": 23,
+        "published": true,
+        "status": 0,
+        "playlist_in": true,
+        "favourite_in": false,
+        "user_profile": {
+          "first_name": "Friedrich",
+          "height": null,
+          "gender": "male",
+          "last_name": "Nietzsche",
+          "favorite_route_grade": 0,
+          "role": "route_setter",
+          "account_id": 23,
+          "username": null
+        }
+      },
+      {
+        "author_grade": 4,
+        "height": 12,
+        "id": "4aa23afe-9f3f-4615-a346-820dd646dbd8",
+        "has_conner": false,
+        "created_by_setter": false,
+        "user_grade": 5,
+        "name": "Route_example_01",
+        "user_grade_count": 0,
+        "created": 1671436422,
+        "visibility": 2,
+        "modified": 1671521509,
+        "popurlarity": 3000,
+        "holds": "[{'d': 'N', 'x': 7, 'y': 1, 'hid': 20, 'index': ''}, {'d': 'W', 'x': 5, 'y': 2, 'hid': 6, 'index': ''}, {'d': 'W', 'x': 8, 'y': 5, 'hid': 3, 'index': ''}, {'d': 'E', 'x': 5, 'y': 6, 'hid': 1, 'index': ''}, {'d': 'N', 'x': 6, 'y': 9, 'hid': 13, 'index': ''}, {'d': 'N', 'x': 3, 'y': 8, 'hid': 11, 'index': ''}, {'d': 'N', 'x': 2, 'y': 12, 'hid': 10, 'index': ''}, {'d': 'E', 'x': 5, 'y': 13, 'hid': 15, 'index': ''}, {'d': 'N', 'x': 4, 'y': 11, 'hid': 18, 'index': ''}, {'d': 'W', 'x': 3, 'y': 16, 'hid': 1, 'index': ''}, {'d': 'S', 'x': 4, 'y': 17, 'hid': 9, 'index': ''}, {'d': 'N', 'x': 4, 'y': 15, 'hid': 17, 'index': ''}, {'d': 'W', 'x': 7, 'y': 16, 'hid': 20, 'index': ''}, {'d': 'N', 'x': 5, 'y': 19, 'hid': 19, 'index': ''}, {'d': 'E', 'x': 8, 'y': 21, 'hid': 4, 'index': ''}, {'d': 'E', 'x': 10, 'y': 19, 'hid': 13, 'index': ''}, {'d': 'N', 'x': 7, 'y': 24, 'hid': 7, 'index': ''}, {'d': 'E', 'x': 8, 'y': 25, 'hid': 3, 'index': ''}, {'d': 'N', 'x': 9, 'y': 23, 'hid': 15, 'index': ''}, {'d': 'W', 'x': 5, 'y': 29, 'hid': 19, 'index': ''}, {'d': 'N', 'x': 6, 'y': 30, 'hid': 8, 'index': ''}, {'d': 'N', 'x': 6, 'y': 27, 'hid': 20, 'index': ''}, {'d': 'S', 'x': 8, 'y': 29, 'hid': 20, 'index': ''}, {'d': 'S', 'x': 7, 'y': 34, 'hid': 9, 'index': ''}, {'d': 'S', 'x': 5, 'y': 36, 'hid': 16, 'index': ''}, {'d': 'E', 'x': 6, 'y': 33, 'hid': 13, 'index': ''}, {'d': 'N', 'x': 8, 'y': 39, 'hid': 15, 'index': ''}, {'d': 'W', 'x': 5, 'y': 41, 'hid': 1, 'index': ''}, {'d': 'E', 'x': 3, 'y': 40, 'hid': 9, 'index': ''}, {'d': 'N', 'x': 3, 'y': 38, 'hid': 20, 'index': ''}, {'d': 'S', 'x': 4, 'y': 39, 'hid': 13, 'index': ''}, {'d': 'E', 'x': 4, 'y': 44, 'hid': 3, 'index': ''}, {'d': 'N', 'x': 6, 'y': 45, 'hid': 1, 'index': ''}]",
+        "user_id": 20,
+        "published": true,
+        "status": 0,
+        "playlist_in": true,
+        "favourite_in": false,
+        "user_profile": {
+          "first_name": "Wilhelm",
+          "height": null,
+          "gender": "male",
+          "last_name": "Leibniz",
+          "favorite_route_grade": 0,
+          "role": "user",
+          "account_id": 20,
+          "username": null
+        }
+      },
+      {
+        "author_grade": 12,
+        "height": 12,
+        "id": "ff951343-ebac-49cc-8c67-5b79bb03a8d7",
+        "has_conner": true,
+        "created_by_setter": false,
+        "user_grade": 13,
+        "name": "Route_example_03",
+        "user_grade_count": 0,
+        "created": 1671440990,
+        "visibility": 2,
+        "modified": 1671521789,
+        "popurlarity": 1500,
+        "holds": "[{'d': 'N', 'x': 8, 'y': 2, 'hid': 18, 'index': ''}, {'d': 'N', 'x': 9, 'y': 5, 'hid': 12, 'index': ''}, {'d': 'E', 'x': 7, 'y': 6, 'hid': 15, 'index': ''}, {'d': 'N', 'x': 10, 'y': 4, 'hid': 13, 'index': ''}, {'d': 'W', 'x': 9, 'y': 8, 'hid': 5, 'index': ''}, {'d': 'N', 'x': 10, 'y': 10, 'hid': 3, 'index': ''}, {'d': 'W', 'x': 11, 'y': 9, 'hid': 9, 'index': ''}, {'d': 'W', 'x': 9, 'y': 14, 'hid': 15, 'index': ''}, {'d': 'N', 'x': 8, 'y': 12, 'hid': 12, 'index': ''}, {'d': 'S', 'x': 10, 'y': 18, 'hid': 9, 'index': ''}, {'d': 'W', 'x': 9, 'y': 19, 'hid': 8, 'index': ''}, {'d': 'W', 'x': 11, 'y': 23, 'hid': 14, 'index': ''}, {'d': 'W', 'x': 8, 'y': 25, 'hid': 12, 'index': ''}, {'d': 'E', 'x': 5, 'y': 23, 'hid': 13, 'index': ''}, {'d': 'N', 'x': 7, 'y': 28, 'hid': 3, 'index': ''}, {'d': 'N', 'x': 9, 'y': 29, 'hid': 8, 'index': ''}, {'d': 'S', 'x': 9, 'y': 31, 'hid': 14, 'index': ''}, {'d': 'E', 'x': 10, 'y': 34, 'hid': 3, 'index': ''}, {'d': 'N', 'x': 8, 'y': 32, 'hid': 13, 'index': ''}, {'d': 'S', 'x': 6, 'y': 37, 'hid': 6, 'index': ''}, {'d': 'W', 'x': 8, 'y': 38, 'hid': 14, 'index': ''}, {'d': 'N', 'x': 7, 'y': 35, 'hid': 20, 'index': ''}, {'d': 'E', 'x': 8, 'y': 41, 'hid': 9, 'index': ''}, {'d': 'W', 'x': 10, 'y': 43, 'hid': 14, 'index': ''}, {'d': 'W', 'x': 8, 'y': 45, 'hid': 5, 'index': ''}, {'d': 'N', 'x': 9, 'y': 46, 'hid': 3, 'index': ''}]",
+        "user_id": 23,
+        "published": true,
+        "status": 0,
+        "playlist_in": true,
+        "favourite_in": true,
+        "user_profile": {
+          "first_name": "Friedrich",
+          "height": null,
+          "gender": "male",
+          "last_name": "Nietzsche",
+          "favorite_route_grade": 0,
+          "role": "route_setter",
+          "account_id": 23,
+          "username": null
+        }
+      }
+    ]
+  },
+  "pagination_details": {
+    "total": 4,
+    "pages": 1,
+    "previous_page": null,
+    "next_page": null,
+    "has_previous": false,
+    "has_next": false
+  }
+}

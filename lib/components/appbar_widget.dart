@@ -8,6 +8,7 @@ import '../router/router_utils.dart';
 import '../theme/app_styles.dart';
 import '../theme/colors.dart';
 import 'app_text.dart';
+import 'package:badges/badges.dart' as badges;
 
 PreferredSizeWidget appBarWidget(
         {required BuildContext context,
@@ -80,10 +81,10 @@ PreferredSizeWidget homeAppbar(BuildContext context,
               color: colorSubText,
             ),
           ),
-          InkWell(
+         /* InkWell(
             child: Container(
               margin: EdgeInsets.only(left: 10.w, right: contentPadding),
-              child: Badge(
+              child: badges.Badge(
                 gradient: LinearGradient(colors: [
                   colorYellow70,
                   colorPrimary,
@@ -104,5 +105,5 @@ PreferredSizeWidget homeAppbar(BuildContext context,
               ),
             ),
             onTap: () => onClickNotification(),
-          ),
+          ),*/
         ]);

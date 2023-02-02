@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:base_bloc/modules/home/home_page.dart';
 import 'package:base_bloc/modules/pairing/pairing_page.dart';
 import 'package:base_bloc/modules/splash/splash_state.dart';
 import 'package:base_bloc/router/router_utils.dart';
@@ -14,5 +15,5 @@ class SplashCubit extends Cubit<SplashState> {
   }
 
   void openHomePage(BuildContext context) =>
-      RouterUtils.pushTo(context, const PairingPage());
+      RouterUtils.pushTo(context, const HomePage());
 }
