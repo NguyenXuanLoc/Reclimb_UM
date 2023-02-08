@@ -10,24 +10,35 @@ class HomeState extends Equatable {
   final List<UserInfoModel> lUserLogin;
   final List<UserInfoModel> lUserCache;
   final List<RoutesModel> lRoutes;
+  final List<RoutesModel> lRoutesDrag;
+  final int? timeStamp;
 
   const HomeState(
       {this.type = StatusType.init,
       this.lRoutes = const [],
+      this.timeStamp,
+      this.lRoutesDrag = const [],
       this.lUserLogin = const [],
       this.lUserCache = const []});
 
-  HomeState copyOf(
-          {StatusType? type,
-          List<UserInfoModel>? lUserLogin,
-          List<UserInfoModel>? lUserCache,
-          List<RoutesModel>? lRoutes}) =>
+  HomeState copyOf({
+    StatusType? type,
+    int? timeStamp,
+    List<UserInfoModel>? lUserLogin,
+    List<UserInfoModel>? lUserCache,
+    List<RoutesModel>? lRoutes,
+    List<RoutesModel>? lRoutesDrag,
+  }) =>
       HomeState(
-          type: type ?? this.type,
-          lUserLogin: lUserLogin ?? this.lUserLogin,
-          lUserCache: lUserCache ?? this.lUserCache,
-          lRoutes: lRoutes ?? this.lRoutes);
+        timeStamp: timeStamp ?? this.timeStamp,
+        type: type ?? this.type,
+        lUserLogin: lUserLogin ?? this.lUserLogin,
+        lUserCache: lUserCache ?? this.lUserCache,
+        lRoutes: lRoutes ?? this.lRoutes,
+        lRoutesDrag: lRoutesDrag ?? this.lRoutesDrag,
+      );
 
   @override
-  List<Object?> get props => [StatusType.init, lUserLogin, lUserCache, lRoutes];
+  List<Object?> get props =>
+      [StatusType.init, lUserLogin, lUserCache, lRoutes, lRoutesDrag,timeStamp];
 }
