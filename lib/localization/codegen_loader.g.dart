@@ -54,8 +54,11 @@ class Applocalizations extends AssetLoader {
     'loginAs': "Login as",
     'playlist': "Playlist",
     'not_data': "Not data",
+    'logout': "Logout",
+    'removeFromPlaylist': "Remove from playlist",
+    'moveToTopPlaylist': "Move to top playlist",
+    'moveToBottomPlaylist': "Move to bottom playlist",
   };
-
   static const Map<String, Map<String, dynamic>> mapLocales = {
     enCode: en,
     plCode: en

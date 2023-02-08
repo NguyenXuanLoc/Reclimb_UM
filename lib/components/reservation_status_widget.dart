@@ -27,7 +27,7 @@ class _ReservationStatusWidgetState extends State<ReservationStatusWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Material(child: SizedBox(
       width: MediaQuery.of(context).size.width,
       child: LinearProgressIndicator(
         minHeight: 2.5,
@@ -35,6 +35,6 @@ class _ReservationStatusWidgetState extends State<ReservationStatusWidget>
         color: const Color(0xff42AB06),
         backgroundColor: colorText0.withOpacity(0.38),
       ),
-    );
+    ));
   }
 }

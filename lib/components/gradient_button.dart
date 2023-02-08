@@ -3,18 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class GradientButton extends StatelessWidget {
-  final double height;
+  final double? height;
   final double? width;
   final Decoration decoration;
   final VoidCallback onTap;
+  final VoidCallback? onDoubleTab;
+  final VoidCallback? onLongPress;
   final Widget widget;
   final BorderRadius? borderRadius;
   final bool isCenter;
 
   const GradientButton(
       {Key? key,
-      required this.height,
+      this.height,
       this.width,
+      this.onDoubleTab,
+      this.onLongPress,
       required this.decoration,
       required this.onTap,
       this.isCenter = false,
@@ -32,6 +36,8 @@ class GradientButton extends StatelessWidget {
         decoration: decoration,
         child: InkWell(
           onTap: onTap,
+          onLongPress: onLongPress,
+          onDoubleTap: onDoubleTab,
           borderRadius: borderRadius,
           child: isCenter ? Center(child: widget) : widget,
         ),

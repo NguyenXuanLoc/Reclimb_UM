@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             Expanded(
                 flex: 3,
                 child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (c, state) => lUserWidget(state.lUserLogin),
+                    builder: (c, state) => lUserWidget(state.lUserLogin,logoutCallback: (){}),
                     bloc: _bloc)),
             space(),
             buttonLoginWithPhone(),
@@ -138,10 +138,13 @@ class _HomePageState extends State<HomePage> {
         style: typoW600.copyWith(fontSize: 14.sp, color: colorText0),
       ));
 
-  Widget lUserWidget(List<UserInfoModel> lUser) => ListView.separated(
-      itemBuilder: (c, i) => ItemUser(model: lUser[i]),
-      separatorBuilder: (c, i) => const SizedBox(height: 10),
-      itemCount: lUser.length);
+  Widget lUserWidget(List<UserInfoModel> lUser,
+          {VoidCallback? logoutCallback}) =>
+      ListView.separated(
+          itemBuilder: (c, i) =>
+              ItemUser(model: lUser[i], logoutCallback: logoutCallback),
+          separatorBuilder: (c, i) => const SizedBox(height: 10),
+          itemCount: lUser.length);
 
   Widget playlistWidget() => Expanded(
           child: Padding(
@@ -172,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                   index: index,
                   detailCallBack: (model) {}),
               separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 5),
               itemCount: state.lRoutes.length));
 
   Widget appbarWidget() => Container(

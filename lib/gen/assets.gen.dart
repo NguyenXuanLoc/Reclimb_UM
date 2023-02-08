@@ -9,6 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsJsonGen {
+  const $AssetsJsonGen();
+
+  /// File path: assets/json/routes.json
+  String get routes => 'assets/json/routes.json';
+
+  /// List of all assets
+  List<String> get values => [routes];
+}
+
 class $AssetsPngGen {
   const $AssetsPngGen();
 
@@ -148,12 +158,6 @@ class $AssetsSvgGen {
   AssetGenImage get avatarTest =>
       const AssetGenImage('assets/svg/avatar_test.png');
 
-  /// File path: assets/svg/b_4.svg
-  String get b4 => 'assets/svg/b_4.svg';
-
-  /// File path: assets/svg/b_5B.svg
-  String get b5B => 'assets/svg/b_5B.svg';
-
   /// File path: assets/svg/back_button.svg
   String get backButton => 'assets/svg/back_button.svg';
 
@@ -274,6 +278,9 @@ class $AssetsSvgGen {
   /// File path: assets/svg/more_vertical.svg
   String get moreVertical => 'assets/svg/more_vertical.svg';
 
+  /// File path: assets/svg/moveToBottom.svg
+  String get moveToBottom => 'assets/svg/moveToBottom.svg';
+
   /// File path: assets/svg/move_to_top.svg
   String get moveToTop => 'assets/svg/move_to_top.svg';
 
@@ -333,8 +340,6 @@ class $AssetsSvgGen {
         addPlayList,
         addToPlayList,
         avatarTest,
-        b4,
-        b5B,
         backButton,
         backCircle,
         bluetooth,
@@ -375,6 +380,7 @@ class $AssetsSvgGen {
         message,
         more,
         moreVertical,
+        moveToBottom,
         moveToTop,
         notification,
         notlocation,
@@ -422,6 +428,7 @@ class $AssetsTranslationsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsJsonGen json = $AssetsJsonGen();
   static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
   static const $AssetsTdGen td = $AssetsTdGen();

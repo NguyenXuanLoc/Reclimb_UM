@@ -46,4 +46,8 @@ abstract class LocaleKeys {
   static const loginWithAccount = 'loginWithAccount';
   static const createAnAccount = 'createAnAccount';
   static const loginAs = 'loginAs';
+  static const logout = 'logout';
+  static const removeFromPlaylist = 'removeFromPlaylist';
+  static const moveToTopPlaylist = 'moveToTopPlaylist';
+  static const moveToBottomPlaylist = 'moveToBottomPlaylist';
 }
