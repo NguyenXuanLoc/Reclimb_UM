@@ -50,4 +50,11 @@ abstract class LocaleKeys {
   static const removeFromPlaylist = 'removeFromPlaylist';
   static const moveToTopPlaylist = 'moveToTopPlaylist';
   static const moveToBottomPlaylist = 'moveToBottomPlaylist';
+  static const forgotPassword = 'forgotPassword';
+  static const email_address = 'email_address';
+  static const password = 'password';
+  static const please_input_pass = 'please_input_pass';
+  static const please_input_valid_email = 'please_input_valid_email';
+  static const please_input_email = 'please_input_email';
+  static const please_input_valid_pass = 'please_input_valid_pass';
 }

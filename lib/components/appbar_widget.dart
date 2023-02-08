@@ -15,7 +15,7 @@ PreferredSizeWidget appBarWidget(
         Widget? leading,
         Widget? title,
         double? titleSpacing = 16,
-        double? leadingWidth = 56,
+        double? leadingWidth = 30,
         double? toolbarHeight,
         String? titleStr,
         Color? backgroundColor,
@@ -45,7 +45,6 @@ PreferredSizeWidget appBarWidget(
           AppText(
             titleStr ?? '',
             style: typoW600.copyWith(
-                fontWeight: FontWeight.w600,
                 fontSize: 22.sp,
                 color: colorText0.withOpacity(0.87)),
           ),

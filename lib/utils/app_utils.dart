@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:base_bloc/base/hex_color.dart';
 import 'package:base_bloc/config/constant.dart';
 import 'package:base_bloc/data/model/background_param.dart';
+import 'package:diacritic/diacritic.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
@@ -451,4 +452,6 @@ class Utils {
         return 0;
     }
   }
+  static bool checkDiacriticsForEmail(String email) =>
+      removeDiacritics(email) == email ? false : true;
 }

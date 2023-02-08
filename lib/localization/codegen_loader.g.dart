@@ -58,7 +58,16 @@ class Applocalizations extends AssetLoader {
     'removeFromPlaylist': "Remove from playlist",
     'moveToTopPlaylist': "Move to top playlist",
     'moveToBottomPlaylist': "Move to bottom playlist",
+    'forgotPassword': "Forgot password",
+    'email_address': "E-mail address",
+    'password': "Password",
+    'please_input_pass': 'Please enter your Password',
+    'please_input_valid_email': 'Please enter valid Email',
+    'please_input_email': 'Please enter your Email',
+    'please_input_valid_pass': 'Please enter valid Password',
+    'login': 'Login',
   };
+
   static const Map<String, Map<String, dynamic>> mapLocales = {
     enCode: en,
     plCode: en
