@@ -23,6 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
       Dialogs.showLoadingDialog(context);
       Timer(const Duration(seconds: 2), () async {
         await Dialogs.hideLoadingDialog();
+        Utils.hideKeyboard(context);
         RouterUtils.pop(context);
       });
     }

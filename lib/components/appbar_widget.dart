@@ -24,7 +24,7 @@ PreferredSizeWidget appBarWidget(
         VoidCallback? onPressed,
         bool automaticallyImplyLeading = true}) =>
     AppBar(
-      toolbarHeight: toolbarHeight,
+      toolbarHeight: toolbarHeight ?? 45.h,
       automaticallyImplyLeading: automaticallyImplyLeading,
       leadingWidth: leadingWidth,
       centerTitle: false,

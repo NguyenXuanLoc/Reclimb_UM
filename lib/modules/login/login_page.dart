@@ -1,6 +1,7 @@
 import 'package:base_bloc/components/app_scalford.dart';
 import 'package:base_bloc/components/app_text.dart';
 import 'package:base_bloc/components/appbar_widget.dart';
+import 'package:base_bloc/config/constant.dart';
 import 'package:base_bloc/data/globals.dart';
 import 'package:base_bloc/localization/locale_keys.dart';
 import 'package:base_bloc/modules/login/login_cubit.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../base/base_state.dart';
 import '../../components/gradient_button.dart';
 import '../../utils/app_utils.dart';
 
@@ -22,7 +24,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends BasePopState<LoginPage> {
   final emailController = TextEditingController();
   final passWordController = TextEditingController();
   late LoginCubit _bloc;
@@ -34,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildWidget(BuildContext context) {
     return AppScaffold(
         padding: EdgeInsets.only(
             top: contentPadding + 20.h,
@@ -135,7 +137,10 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   PreferredSizeWidget appbar() => appBarWidget(
-        context: context,
-        titleStr: LocaleKeys.login.tr(),
-      );
+      context: context,
+      backgroundColor: colorBlack.withOpacity(0.8),
+      titleStr: LocaleKeys.login.tr());
+
+  @override
+  int get tabIndex => ConstantKey.TAB_HOME;
 }

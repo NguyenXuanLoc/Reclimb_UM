@@ -6,6 +6,8 @@ import 'package:base_bloc/data/model/routes_model.dart';
 import 'package:base_bloc/data/nearby/nearby_data.dart';
 import 'package:base_bloc/data/nearby/nearby_ext.dart';
 import 'package:base_bloc/modules/home/home_state.dart';
+import 'package:base_bloc/router/router.dart';
+import 'package:base_bloc/router/router_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
@@ -16,6 +18,9 @@ class HomeCubit extends BaseCubit<HomeState> {
     emit(HomeState(lUserLogin: lUserFake(), lUserCache: lUserCache()));
     getRoutes();
   }
+
+  void loginWithAccOnClick(BuildContext context) =>
+      RouterUtils.pushHome(context: context, route: HomeRouters.login);
 
   void stopDragOnClick()=>emit(state.copyOf(lRoutesDrag: []));
 

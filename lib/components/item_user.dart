@@ -63,7 +63,7 @@ class _ItemUserState extends State<ItemUser> {
       },
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       widget: Row(mainAxisSize: MainAxisSize.min, children: [
-        SvgPicture.asset(Assets.svg.logout),
+        SvgPicture.asset(Assets.svg.logout,width: 18.w,),
         const SizedBox(width: 7),
         AppText(LocaleKeys.logout.tr(),
             style: typoW500.copyWith(
