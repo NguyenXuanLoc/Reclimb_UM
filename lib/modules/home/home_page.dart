@@ -15,8 +15,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../data/model/info_user_model.dart';
+import '../../data/model/routes_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -75,7 +75,8 @@ class _HomePageState extends State<HomePage> {
             Expanded(
                 flex: 3,
                 child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (c, state) => lUserWidget(state.lUserLogin,logoutCallback: (){}),
+                    builder: (c, state) =>
+                        lUserWidget(state.lUserLogin, logoutCallback: () {}),
                     bloc: _bloc)),
             space(),
             buttonLoginWithPhone(),
@@ -158,25 +159,56 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 16.sp, color: colorText0.withOpacity(0.6)),
             ),
             space(),
-            Expanded(child: lRoutesWidget())
+            Expanded(child: playlistContentWidget())
           ],
         ),
       ));
 
-  Widget lRoutesWidget() => BlocBuilder<HomeCubit, HomeState>(
+  Widget playlistContentWidget() => BlocBuilder<HomeCubit, HomeState>(
       bloc: _bloc,
-      builder: (c, state) => state.lRoutes.isEmpty
-          ? const Center(child: AppNotDataWidget())
-          : ListView.separated(
-              itemBuilder: (context, index) => ItemInfoRoutes(
-                  context: context,
-                  model: state.lRoutes[index],
-                  callBack: (model) {},
-                  index: index,
-                  detailCallBack: (model) {}),
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 5),
-              itemCount: state.lRoutes.length));
+      builder: (c, state) => state.lRoutesDrag.isNotEmpty
+          ? lDragWidget(state)
+          : state.lRoutes.isEmpty
+              ? const Center(child: AppNotDataWidget())
+              : lRoutesWidget(state.lRoutes));
+
+  Widget lRoutesWidget(List<RoutesModel> lRoutesModel) =>
+      ListView.separated(
+          itemBuilder: (context, index) => ItemInfoRoutes(
+              context: context,
+              model: lRoutesModel[index],
+              onLongPressCallBack: (model) => _bloc.routeOnLongPress(model),
+              callBack: (model) {},
+              index: index,
+              detailCallBack: (model) {}),
+          separatorBuilder: (BuildContext context, int index) =>
+          const SizedBox(height: 5),
+          itemCount: lRoutesModel.length);
+
+  Widget lDragWidget(HomeState state) {
+    return Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
+        child: ReorderableListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemBuilder: (c, i) => Container(
+                key: Key('$i'),
+                color: Colors.transparent,
+                padding: const EdgeInsets.only(bottom: 5),
+                child: ItemInfoRoutes(
+                    isDrag: true,
+                    context: context,
+                    model: state.lRoutesDrag[i],
+                    onLongPressCallBack: (model) {},
+                    callBack: (model) {},
+                    index: i,
+                    detailCallBack: (model) {})),
+            itemCount: state.lRoutesDrag.length,
+            onReorder: (int oldIndex, int newIndex) =>
+                _bloc.dragItem(oldIndex, newIndex)));
+  }
 
   Widget appbarWidget() => Container(
       padding: EdgeInsets.only(
@@ -194,12 +226,38 @@ class _HomePageState extends State<HomePage> {
                   child: AppText(LocaleKeys.climber.tr(),
                       style: typoW600.copyWith(fontSize: 22.sp))),
               Expanded(
-                  child: AppText(LocaleKeys.playlist.tr(),
-                      style: typoW600.copyWith(fontSize: 22.sp)))
+                  child: Row(
+                children: [
+                  AppText(LocaleKeys.playlist.tr(),
+                      style: typoW600.copyWith(fontSize: 22.sp)),
+                  const Spacer(),
+                  const Spacer(),
+                  BlocBuilder<HomeCubit, HomeState>(
+                      builder: (c, state) => Visibility(
+                            visible: state.lRoutesDrag.isNotEmpty,
+                            child: InkWell(
+                                onTap: () => _bloc.saveDragOnClick(),
+                                child: const Icon(Icons.done_all,
+                                    color: Colors.white, size: 15)),
+                          ),
+                      bloc: _bloc),
+                  const Spacer(),
+                  BlocBuilder<HomeCubit, HomeState>(
+                      builder: (c, state) => Visibility(
+                            visible: state.lRoutesDrag.isNotEmpty,
+                            child: InkWell(
+                                onTap: () => _bloc.stopDragOnClick(),
+                                child: const Icon(Icons.clear,
+                                    color: Colors.white, size: 15)),
+                          ),
+                      bloc: _bloc)
+                ],
+              ))
             ],
           )
         ],
       ));
+
 
   Widget space({double? height}) => SizedBox(height: height ?? 10.h);
 

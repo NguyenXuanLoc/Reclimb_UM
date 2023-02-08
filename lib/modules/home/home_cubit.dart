@@ -9,10 +9,41 @@ import 'package:base_bloc/modules/home/home_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
+import '../../data/fake_data.dart';
+
 class HomeCubit extends BaseCubit<HomeState> {
   HomeCubit() : super(const HomeState()) {
     emit(HomeState(lUserLogin: lUserFake(), lUserCache: lUserCache()));
     getRoutes();
+  }
+
+  void stopDragOnClick()=>emit(state.copyOf(lRoutesDrag: []));
+
+  void routeOnLongPress(RoutesModel model) =>
+      emit(state.copyOf(lRoutesDrag: state.lRoutes
+          .where((element) => element.userId == model.userId)
+          .toList()));
+
+  void dragItem(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) newIndex -= 1;
+    var model = state.lRoutesDrag.removeAt(oldIndex);
+    state.lRoutesDrag.insert(newIndex, model);
+    emit(state.copyOf(
+        lRoutesDrag: state.lRoutesDrag,
+        timeStamp: DateTime.now().microsecondsSinceEpoch));
+  }
+
+  void saveDragOnClick() {
+    var userId = 0;
+    if (state.lRoutesDrag.isNotEmpty) userId = state.lRoutesDrag[0].userId ?? 0;
+    int indexOfDrag = 0;
+    for (int i = 0; i < state.lRoutes.length; i++) {
+      if (state.lRoutes[i].userId == userId) {
+        state.lRoutes[i] = state.lRoutesDrag[indexOfDrag];
+        indexOfDrag++;
+      }
+    }
+    emit(state.copyOf(lRoutesDrag: [], lRoutes: state.lRoutes));
   }
 
   void showConnectDevice(BuildContext context) {}
@@ -31,59 +62,4 @@ class HomeCubit extends BaseCubit<HomeState> {
     emit(state.copyOf(lRoutes: lResponse));
   }
 
-  List<UserInfoModel> lUserFake() => [
-        UserInfoModel(
-            'https://noithatbinhminh.com.vn/wp-content/uploads/2022/08/anh-dep-56.jpg',
-            "Adam Kowalski",
-            true,
-            false),
-        UserInfoModel(
-            'https://i.9mobi.vn/cf/images/2015/03/nkk/nhung-hinh-anh-dep-14.jpg',
-            "Zoe Smith",
-            true,
-            true),
-        UserInfoModel(
-            'https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg',
-            "Anna Novak",
-            true,
-            false),
-        UserInfoModel(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Wmp6ghw6G16qhGQUMiXJZ0vHtEDS1fqtE8jtsKA&s',
-            "Paul Koval",
-            true,
-            false)
-      ];
-
-  List<UserInfoModel> lUserCache() => [
-        UserInfoModel(
-            'https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg',
-            "Anna Novak",
-            false,
-            false),
-        UserInfoModel(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Wmp6ghw6G16qhGQUMiXJZ0vHtEDS1fqtE8jtsKA&s',
-            "Paul Koval",
-            false,
-            false),
-        UserInfoModel(
-            'https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg',
-            "Anna Novak",
-            false,
-            false),
-        UserInfoModel(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Wmp6ghw6G16qhGQUMiXJZ0vHtEDS1fqtE8jtsKA&s',
-            "Paul Koval",
-            false,
-            false),
-        UserInfoModel(
-            'https://haycafe.vn/wp-content/uploads/2022/02/Anh-gai-xinh-de-thuong.jpg',
-            "Anna Novak",
-            false,
-            false),
-        UserInfoModel(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Wmp6ghw6G16qhGQUMiXJZ0vHtEDS1fqtE8jtsKA&s',
-            "Paul Koval",
-            false,
-            false)
-      ];
 }

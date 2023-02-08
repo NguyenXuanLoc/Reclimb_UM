@@ -27,13 +27,18 @@ class ItemInfoRoutes extends StatefulWidget {
   final Function(RoutesModel model)? onLongPressCallBack;
   final Function(RoutesModel model) callBack;
   final Function(RoutesModel action) detailCallBack;
-  final Function(RoutesModel model)? removeSelectCallBack;
+  final VoidCallback? removeFromPlaylistCallback;
+  final VoidCallback? moveToTopPlaylistCallback;
+  final VoidCallback? moveToBottomPlaylistCallback;
   final VoidCallback? filterOnclick;
   final Function(RoutesModel model)? doubleTapCallBack;
   final int index;
 
   const ItemInfoRoutes(
       {Key? key,
+      this.removeFromPlaylistCallback,
+      this.moveToBottomPlaylistCallback,
+      this.moveToTopPlaylistCallback,
       this.isDrag = false,
       this.onLongPressCallBack,
       required this.context,
@@ -42,7 +47,6 @@ class ItemInfoRoutes extends StatefulWidget {
       required this.index,
       required this.detailCallBack,
       this.filterOnclick,
-      this.removeSelectCallBack,
       this.isShowSelect = false,
       this.doubleTapCallBack})
       : super(key: key);
@@ -76,8 +80,8 @@ class _ItemInfoRoutesState extends State<ItemInfoRoutes> {
   Widget build(BuildContext context) {
     var infoBackground =
         Utils.getBackgroundColor(widget.model.authorGrade ?? 0);
-    return Container(
-        padding: EdgeInsets.only(bottom: widget.model.isHighLight ? 6 : 0),
+    return Container(color: Colors.transparent,
+        padding: EdgeInsets.only(bottom: widget.model.isHighLight ? 3 : 0),
         height: widget.model.isHighLight ? 96.h : 72.h,
         key: Key('${widget.index}'),
         child: tooltip(
@@ -108,8 +112,7 @@ class _ItemInfoRoutesState extends State<ItemInfoRoutes> {
                         ? widget.filterOnclick?.call()
                         : widget.detailCallBack.call(widget.model),
                     onDoubleTab: tooltipOnclick,
-                    widget: content(infoBackground))
-            ));
+                    widget: content(infoBackground))));
   }
 
   void tooltipOnclick() {
@@ -123,34 +126,48 @@ class _ItemInfoRoutesState extends State<ItemInfoRoutes> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          itemToolTip(Assets.svg.removeFromPlaylist,
-              LocaleKeys.removeFromPlaylist.tr()),
+          itemToolTip(
+              Assets.svg.removeFromPlaylist,
+              LocaleKeys.removeFromPlaylist.tr(),
+              () => widget.moveToTopPlaylistCallback?.call()),
           Divider(height: 0.08, color: colorWhite.withOpacity(0.4)),
-          itemToolTip(Assets.svg.moveToTop, LocaleKeys.moveToTopPlaylist.tr()),
+          itemToolTip(Assets.svg.moveToTop, LocaleKeys.moveToTopPlaylist.tr(),
+              () => widget.moveToTopPlaylistCallback?.call()),
           Divider(height: 0.08, color: colorWhite.withOpacity(0.4)),
           itemToolTip(
-              Assets.svg.moveToBottom, LocaleKeys.moveToBottomPlaylist.tr()),
+              Assets.svg.moveToBottom,
+              LocaleKeys.moveToBottomPlaylist.tr(),
+              () => widget.moveToBottomPlaylistCallback?.call()),
         ],
       ));
 
-  Widget itemToolTip(String icon, String content) => Padding(
-      //To do
-      padding: EdgeInsets.only(top: 6.h, bottom: 6.h, left: 5),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(icon, width: 16.w),
-          const SizedBox(width: 7),
-          AppText(content,
-              style: typoW400.copyWith(
-                  decoration: TextDecoration.none,
-                  fontSize: 16.sp,
-                  color: colorText0)),
-          const Spacer()
-        ],
-      ));
+  Widget itemToolTip(String icon, String content, VoidCallback callback) =>
+      Material(color: Colors.transparent,
+        child: InkWell(
+            child: Padding(
+                padding: EdgeInsets.only(top: 6.h, bottom: 6.h, left: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(icon, width: 16.w),
+                    const SizedBox(width: 7),
+                    AppText(content,
+                        style: typoW400.copyWith(
+                            decoration: TextDecoration.none,
+                            fontSize: 16.sp,
+                            color: colorText0)),
+                    const Spacer()
+                  ],
+                )),
+            onTap: () {
+              callback.call();
+              setState(() {
+                isShowTooltip = !isShowTooltip;
+              });
+            }),
+      );
 
   Widget tooltip(Widget contentTooltip, Widget contentWidget) => SimpleTooltip(
       minimumOutSidePadding: 0,
@@ -182,50 +199,37 @@ class _ItemInfoRoutesState extends State<ItemInfoRoutes> {
       child: Row(
         children: [
           Visibility(
-            visible: widget.isDrag,
-            child: const Expanded(
-                flex: 2,
-                child: Icon(
-                  Icons.dehaze,
-                  color: colorWhite,
-                )),
-          ),
-          SizedBox(
-            width: 15.w,
-          ),
+              visible: widget.isDrag,
+              child: const Expanded(
+                  flex: 2, child: Icon(Icons.dehaze, color: colorWhite,size: 12,))),
+          SizedBox(width: 15.w),
           Expanded(
-            flex: !widget.isDrag ? 3 : 4,
-            child: widget.model.hasConner == false
-                ? AppText(Utils.getGrade(widget.model.authorGrade ?? 0),
-                    style: googleFont.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: colorText0,
-                        fontSize: 31.sp))
-                : Padding(
-                    padding: EdgeInsets.only(top: 5.h),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        AppText(
-                          Utils.getGrade(widget.model.authorGrade ?? 0),
-                          style: googleFont.copyWith(
-                              height: 1,
-                              fontWeight: FontWeight.w700,
-                              color: colorText0,
-                              fontSize: 29.sp),
-                        ),
-                        AppText(
-                          " ${LocaleKeys.corner.tr()}",
-                          style: typoW400.copyWith(
-                              height: 1,
-                              color: colorWhite.withOpacity(0.87),
-                              fontSize: 12.7.sp),
-                        ),
-                      ],
-                    ),
-                  ),
-          ),
+              flex: !widget.isDrag ? 3 : 4,
+              child: widget.model.hasConner == false
+                  ? AppText(Utils.getGrade(widget.model.authorGrade ?? 0),
+                      style: googleFont.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: colorText0,
+                          fontSize: 31.sp))
+                  : Padding(
+                      padding: EdgeInsets.only(top: 5.h),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppText(Utils.getGrade(widget.model.authorGrade ?? 0),
+                              style: googleFont.copyWith(
+                                  height: 1,
+                                  fontWeight: FontWeight.w700,
+                                  color: colorText0,
+                                  fontSize: 29.sp)),
+                          AppText(" ${LocaleKeys.corner.tr()}",
+                              style: typoW400.copyWith(
+                                  height: 1,
+                                  color: colorWhite.withOpacity(0.87),
+                                  fontSize: 12.7.sp)),
+                        ],
+                      ))),
           Expanded(
               flex: 8,
               child: Column(
