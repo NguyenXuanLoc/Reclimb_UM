@@ -20,21 +20,24 @@ class _ReservationStatusWidgetState extends State<ReservationStatusWidget>
     statusReservationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 15),
-    )..addListener(() => setState(() {}));
+    )..addListener(() {
+        try {
+          if (mounted) setState(() {});
+        } catch (ex) {}
+      });
     statusReservationController.repeat(reverse: true);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(child: SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: LinearProgressIndicator(
-        minHeight: 2.5,
-        value: statusReservationController.value,
-        color: const Color(0xff42AB06),
-        backgroundColor: colorText0.withOpacity(0.38),
-      ),
-    ));
+    return Material(
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: LinearProgressIndicator(
+                minHeight: 2.5,
+                value: statusReservationController.value,
+                color: const Color(0xff42AB06),
+                backgroundColor: colorText0.withOpacity(0.38))));
   }
 }

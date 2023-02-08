@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(30),
                   gradient: const LinearGradient(
                       colors: [Colors.transparent, Colors.transparent])),
-              onTap: () {},
+              onTap: () => _bloc.loginWithAccOnClick(context),
               widget: AppText(LocaleKeys.loginWithAccount.tr(),
                   style:
                       typoW600.copyWith(fontSize: 14.sp, color: colorText0))),
@@ -214,47 +214,39 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.only(
           left: contentPadding, right: contentPadding, top: 10, bottom: 14.h),
       color: colorBlack,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
         children: [
-          reservationInfoWidget(),
-          space(),
-          Divider(height: 3.h, color: colorBlack.withOpacity(0.12)),
-          Row(
+          Expanded(
+              child: AppText(LocaleKeys.climber.tr(),
+                  style: typoW600.copyWith(fontSize: 22.sp))),
+          Expanded(
+              child: Row(
             children: [
-              Expanded(
-                  child: AppText(LocaleKeys.climber.tr(),
-                      style: typoW600.copyWith(fontSize: 22.sp))),
-              Expanded(
-                  child: Row(
-                children: [
-                  AppText(LocaleKeys.playlist.tr(),
-                      style: typoW600.copyWith(fontSize: 22.sp)),
-                  const Spacer(),
-                  const Spacer(),
-                  BlocBuilder<HomeCubit, HomeState>(
-                      builder: (c, state) => Visibility(
-                            visible: state.lRoutesDrag.isNotEmpty,
-                            child: InkWell(
-                                onTap: () => _bloc.saveDragOnClick(),
-                                child: const Icon(Icons.done_all,
-                                    color: Colors.white, size: 15)),
-                          ),
-                      bloc: _bloc),
-                  const Spacer(),
-                  BlocBuilder<HomeCubit, HomeState>(
-                      builder: (c, state) => Visibility(
-                            visible: state.lRoutesDrag.isNotEmpty,
-                            child: InkWell(
-                                onTap: () => _bloc.stopDragOnClick(),
-                                child: const Icon(Icons.clear,
-                                    color: Colors.white, size: 15)),
-                          ),
-                      bloc: _bloc)
-                ],
-              ))
+              AppText(LocaleKeys.playlist.tr(),
+                  style: typoW600.copyWith(fontSize: 22.sp)),
+              const Spacer(),
+              const Spacer(),
+              BlocBuilder<HomeCubit, HomeState>(
+                  builder: (c, state) => Visibility(
+                        visible: state.lRoutesDrag.isNotEmpty,
+                        child: InkWell(
+                            onTap: () => _bloc.saveDragOnClick(),
+                            child: const Icon(Icons.done_all,
+                                color: Colors.white, size: 15)),
+                      ),
+                  bloc: _bloc),
+              const Spacer(),
+              BlocBuilder<HomeCubit, HomeState>(
+                  builder: (c, state) => Visibility(
+                        visible: state.lRoutesDrag.isNotEmpty,
+                        child: InkWell(
+                            onTap: () => _bloc.stopDragOnClick(),
+                            child: const Icon(Icons.clear,
+                                color: Colors.white, size: 15)),
+                      ),
+                  bloc: _bloc)
             ],
-          )
+          ))
         ],
       ));
 

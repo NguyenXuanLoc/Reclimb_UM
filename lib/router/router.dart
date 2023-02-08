@@ -19,3 +19,17 @@ class Routers {
     router.define(pairing, handler: routePairing);
   }
 }
+
+class HomeRouters {
+  static String root = "/";
+  static String login = "/login";
+
+  static void configureRoutes(FluroRouter router) {
+    router.notFoundHandler = Handler(handlerFunc:
+        (BuildContext? context, Map<String, List<String>>? params) {
+      logE("ROUTE WAS NOT FOUND !!!");
+    });
+    router.define(root, handler: routeHome);
+    router.define(login, handler: routeLogin);
+  }
+}

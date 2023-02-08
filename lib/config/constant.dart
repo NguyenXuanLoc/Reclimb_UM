@@ -16,6 +16,8 @@ class StorageKey {
 }
 
 class ConstantKey {
+  static const TAB_HOME = 0;
+
   static const String USER = 'user';
   static const int aDAY=86400000;
   static const String DYNAMIC_LINK="https://docsify.page.link";
@@ -69,14 +71,6 @@ class ApiKey {
   static const success = "success";
   static const error = "error";
   static const paging = "paging";
-}
-
-class BottomNavigationConstant{
-  static const TAB_HOME = 0;
-  static const TAB_ROUTES = 1;
-  static const TAB_CLIMB = 2;
-  static const TAB_RESERVATIONS = 3;
-  static const TAB_PROFILE = 4;
 }
 
 class SearchConstant {
