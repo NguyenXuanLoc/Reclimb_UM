@@ -52,9 +52,12 @@ class _HomePageState extends State<HomePage> {
           children: [
             BlocBuilder<HomeCubit, HomeState>(
                 bloc: _bloc,
-                builder: (c, state) => state.currentRoute != null
-                    ? routeDetailWidget()
-                    : climberWidget()),
+                builder: (c, state) => Expanded(child: Stack(
+                    children: [
+                      climberWidget(),
+                      routeDetailWidget()
+                    ]
+                ))),
             Container(
                 height: MediaQuery.of(context).size.height,
                 width: 1.w,
@@ -66,55 +69,53 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  Widget routeDetailWidget() => Expanded(
-      child: BlocBuilder<HomeCubit, HomeState>(
-          bloc: _bloc,
-          builder: (c, state) => RoutesDetailPage(
-              goBackCallback: () => _bloc.dismissRouteDetail(),
-              model: state.currentRoute!,
-              controller: routesDetailController)));
+  Widget routeDetailWidget() => BlocBuilder<HomeCubit, HomeState>(
+      bloc: _bloc,
+      builder: (c, state) =>state.currentRoute!=null ? RoutesDetailPage(
+          goBackCallback: () => _bloc.dismissRouteDetail(),
+          model: state.currentRoute!,
+          controller: routesDetailController): SizedBox());
 
-  Widget climberWidget() => Expanded(
-          child: Padding(
-        padding: EdgeInsets.all(contentPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppText(LocaleKeys.climber.tr(),
-              style: typoW600.copyWith(fontSize: 22.sp)),
-            AppText(
-              LocaleKeys.logged.tr(),
-              style: typoW400.copyWith(
-                  fontSize: 16.sp, color: colorText0.withOpacity(0.87)),
-            ),
-            space(),
-            Expanded(
-                flex: 3,
-                child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (c, state) => state.lUserLogin.isEmpty
-                        ? const Center(child: AppNotDataWidget())
-                        : lUserWidget(state.lUserLogin, logoutCallback: () {}),
-                    bloc: _bloc)),
-            space(),
-            buttonLoginWithPhone(),
-            space(),
-            loginWithAccountWidget(),
-            space(),
-            AppText(LocaleKeys.loginAs.tr(),
-                style: typoW400.copyWith(
-                    fontSize: 16.sp, color: colorText0.withOpacity(0.87))),
-            space(),
-            Expanded(
-                flex: 9,
-                child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (c, state) => state.lUserCache.isEmpty
-                        ? const Center(child: AppNotDataWidget())
-                        : lUserWidget(state.lUserCache),
-                    bloc: _bloc)),
-            space(height: 10),
-          ],
+  Widget climberWidget() => Padding(
+    padding: EdgeInsets.all(contentPadding),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppText(LocaleKeys.climber.tr(),
+            style: typoW600.copyWith(fontSize: 22.sp)),
+        AppText(
+          LocaleKeys.logged.tr(),
+          style: typoW400.copyWith(
+              fontSize: 16.sp, color: colorText0.withOpacity(0.87)),
         ),
-      ));
+        space(),
+        Expanded(
+            flex: 3,
+            child: BlocBuilder<HomeCubit, HomeState>(
+                builder: (c, state) => state.lUserLogin.isEmpty
+                    ? const Center(child: AppNotDataWidget())
+                    : lUserWidget(state.lUserLogin),
+                bloc: _bloc)),
+        space(),
+        buttonLoginWithPhone(),
+        space(),
+        loginWithAccountWidget(),
+        space(),
+        AppText(LocaleKeys.loginAs.tr(),
+            style: typoW400.copyWith(
+                fontSize: 16.sp, color: colorText0.withOpacity(0.87))),
+        space(),
+        Expanded(
+            flex: 9,
+            child: BlocBuilder<HomeCubit, HomeState>(
+                builder: (c, state) => state.lUserCache.isEmpty
+                    ? const Center(child: AppNotDataWidget())
+                    : lUserWidget(state.lUserCache,isLogin: false),
+                bloc: _bloc)),
+        space(height: 10),
+      ],
+    ),
+  );
 
   Widget loginWithAccountWidget() => Row(
         children: [
@@ -158,11 +159,14 @@ class _HomePageState extends State<HomePage> {
         style: typoW600.copyWith(fontSize: 14.sp, color: colorText0),
       ));
 
-  Widget lUserWidget(List<UserInfoModel> lUser,
-          {VoidCallback? logoutCallback}) =>
+  Widget lUserWidget(List<UserInfoModel> lUser, {bool isLogin = true}) =>
       ListView.separated(
-          itemBuilder: (c, i) =>
-              ItemUser(model: lUser[i], logoutCallback: logoutCallback),
+          itemBuilder: (c, i) => isLogin
+              ? ItemUser(
+                  model: lUser[i], logoutCallback: () => _bloc.logoutOnClick(i))
+              : ItemUser(
+                  model: lUser[i],
+                  loginCallback: () => _bloc.loginAsOnclick(i,context)),
           separatorBuilder: (c, i) => const SizedBox(height: 10),
           itemCount: lUser.length);
 
@@ -220,18 +224,19 @@ class _HomePageState extends State<HomePage> {
 
   Widget lRoutesWidget(List<RoutesModel> lRoutesModel) =>
       ListView.separated(
-          itemBuilder: (context, index) => ItemInfoRoutes(
-              context: context,
-              model: lRoutesModel[index],
-              onLongPressCallBack: (model) => _bloc.routeOnLongPress(model),
-              callBack: (model) {
-                logE("TAG ONTAB: $model");
-              },
-              index: index,
-              detailCallBack: (model)=>_bloc.itemRouteOnClick(model)),
-          separatorBuilder: (BuildContext context, int index) =>
+      itemBuilder: (context, index) => ItemInfoRoutes(
+          moveToBottomPlaylistCallback: () =>_bloc.moveToBottomOnClick(index, lRoutesModel[index]),
+          moveToTopPlaylistCallback: ()=>_bloc.moveToTopOnClick(index, lRoutesModel[index]),
+          removeFromPlaylistCallback: ()=>_bloc.removeFromPlaylistOnClick(index, lRoutesModel[index]),
+          context: context,
+          model: lRoutesModel[index],
+          onLongPressCallBack: (model) => _bloc.routeOnLongPress(model),
+          callBack: (model) {},
+          index: index,
+          detailCallBack: (model) => _bloc.itemRouteOnClick(model)),
+      separatorBuilder: (BuildContext context, int index) =>
           const SizedBox(height: 5),
-          itemCount: lRoutesModel.length);
+      itemCount: lRoutesModel.length);
 
   Widget lDragWidget(HomeState state) {
     return Theme(

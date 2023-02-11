@@ -26,7 +26,7 @@ class HomeState extends Equatable {
   HomeState copyOf({
     StatusType? type,
     int? timeStamp,
-    RoutesModel? currentRoute,
+    required RoutesModel? currentRoute,
     List<UserInfoModel>? lUserLogin,
     List<UserInfoModel>? lUserCache,
     List<RoutesModel>? lRoutes,
