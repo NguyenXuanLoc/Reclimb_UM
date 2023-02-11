@@ -66,6 +66,12 @@ class Applocalizations extends AssetLoader {
     'please_input_email': 'Please enter your Email',
     'please_input_valid_pass': 'Please enter valid Password',
     'login': 'Login',
+    "author": 'Author',
+    "popularity": 'Popularity',
+    "info": 'info',
+    "nextWeek": 'Next week',
+    "today": 'Today',
+    "tomorrow": 'Tomorrow',
   };
 
   static const Map<String, Map<String, dynamic>> mapLocales = {

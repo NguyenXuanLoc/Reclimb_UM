@@ -11,12 +11,14 @@ import 'package:base_bloc/modules/home/home_cubit.dart';
 import 'package:base_bloc/modules/home/home_state.dart';
 import 'package:base_bloc/theme/app_styles.dart';
 import 'package:base_bloc/theme/colors.dart';
+import 'package:base_bloc/utils/log_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../data/model/info_user_model.dart';
 import '../../data/model/routes_model.dart';
+import '../routers_detail/routes_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,10 +29,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late HomeCubit _bloc;
-
+  final routesDetailController = RoutesDetailController();
   @override
   void initState() {
-    _bloc = HomeCubit();
+    _bloc = HomeCubit(routesDetailController);
     super.initState();
   }
 
@@ -44,11 +46,15 @@ class _HomePageState extends State<HomePage> {
     return AppScaffold(
         body: Column(
       children: [
-        appbarWidget(),
+        // appbarWidget(),
         Expanded(
             child: Row(
           children: [
-            climberWidget(),
+            BlocBuilder<HomeCubit, HomeState>(
+                bloc: _bloc,
+                builder: (c, state) => state.currentRoute != null
+                    ? routeDetailWidget()
+                    : climberWidget()),
             Container(
                 height: MediaQuery.of(context).size.height,
                 width: 1.w,
@@ -60,12 +66,22 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
+  Widget routeDetailWidget() => Expanded(
+      child: BlocBuilder<HomeCubit, HomeState>(
+          bloc: _bloc,
+          builder: (c, state) => RoutesDetailPage(
+              goBackCallback: () => _bloc.dismissRouteDetail(),
+              model: state.currentRoute!,
+              controller: routesDetailController)));
+
   Widget climberWidget() => Expanded(
           child: Padding(
         padding: EdgeInsets.all(contentPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            AppText(LocaleKeys.climber.tr(),
+              style: typoW600.copyWith(fontSize: 22.sp)),
             AppText(
               LocaleKeys.logged.tr(),
               style: typoW400.copyWith(
@@ -75,8 +91,9 @@ class _HomePageState extends State<HomePage> {
             Expanded(
                 flex: 3,
                 child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (c, state) =>
-                        lUserWidget(state.lUserLogin, logoutCallback: () {}),
+                    builder: (c, state) => state.lUserLogin.isEmpty
+                        ? const Center(child: AppNotDataWidget())
+                        : lUserWidget(state.lUserLogin, logoutCallback: () {}),
                     bloc: _bloc)),
             space(),
             buttonLoginWithPhone(),
@@ -90,7 +107,9 @@ class _HomePageState extends State<HomePage> {
             Expanded(
                 flex: 9,
                 child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (c, state) => lUserWidget(state.lUserCache),
+                    builder: (c, state) => state.lUserCache.isEmpty
+                        ? const Center(child: AppNotDataWidget())
+                        : lUserWidget(state.lUserCache),
                     bloc: _bloc)),
             space(height: 10),
           ],
@@ -153,6 +172,33 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              children: [
+                AppText(LocaleKeys.playlist.tr(),
+                    style: typoW600.copyWith(fontSize: 22.sp)),
+                const Spacer(),
+                const Spacer(),
+                BlocBuilder<HomeCubit, HomeState>(
+                    builder: (c, state) => Visibility(
+                      visible: state.lRoutesDrag.isNotEmpty,
+                      child: InkWell(
+                          onTap: () => _bloc.saveDragOnClick(),
+                          child: const Icon(Icons.done_all,
+                              color: Colors.white, size: 15)),
+                    ),
+                    bloc: _bloc),
+                const Spacer(),
+                BlocBuilder<HomeCubit, HomeState>(
+                    builder: (c, state) => Visibility(
+                      visible: state.lRoutesDrag.isNotEmpty,
+                      child: InkWell(
+                          onTap: () => _bloc.stopDragOnClick(),
+                          child: const Icon(Icons.clear,
+                              color: Colors.white, size: 15)),
+                    ),
+                    bloc: _bloc)
+              ],
+            ),
             AppText(
               LocaleKeys.dragAndDropToChangeOrder.tr(),
               style: typoW400.copyWith(
@@ -178,9 +224,11 @@ class _HomePageState extends State<HomePage> {
               context: context,
               model: lRoutesModel[index],
               onLongPressCallBack: (model) => _bloc.routeOnLongPress(model),
-              callBack: (model) {},
+              callBack: (model) {
+                logE("TAG ONTAB: $model");
+              },
               index: index,
-              detailCallBack: (model) {}),
+              detailCallBack: (model)=>_bloc.itemRouteOnClick(model)),
           separatorBuilder: (BuildContext context, int index) =>
           const SizedBox(height: 5),
           itemCount: lRoutesModel.length);

@@ -65,7 +65,7 @@ class RoutesModel {
   bool isHighLight;
 
   RoutesModel copyOf(
-          int? userGrade,
+          {int? userGrade,
           bool? hasConner,
           String? name,
           String? authorFirstName,
@@ -84,7 +84,7 @@ class RoutesModel {
           bool? playlistIn,
           bool? favouriteIn,
           UserProfileModel? userProfile,
-          bool? isHighLight) =>
+          bool? isHighLight}) =>
       RoutesModel(
           userGrade: userGrade ?? this.userGrade,
           hasConner: hasConner ?? this.hasConner,
