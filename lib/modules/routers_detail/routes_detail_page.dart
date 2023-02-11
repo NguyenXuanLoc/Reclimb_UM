@@ -30,7 +30,7 @@ class RoutesDetailController {
   RoutesDetailController();
 
   set setRoutes(RoutesModel value) {
-    _getNewModel!(value);
+    _getNewModel != null ? _getNewModel!(value) : null;
   }
 }
 

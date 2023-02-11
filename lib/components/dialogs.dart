@@ -11,6 +11,8 @@ import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../config/app_nearby_service.dart';
+import '../data/model/info_user_model.dart';
+import 'LoginAccDialog.dart';
 import 'app_text.dart';
 
 class Dialogs {
@@ -65,6 +67,24 @@ class Dialogs {
                   content: InfoDeviceDialog(
                       deviceModel: device,
                       connectCallBack: () => connectCallBack.call())));
+        });
+  }
+
+  static Future<void>? showLoginAccountDialog(BuildContext context,
+      {required UserInfoModel model,
+      String? text}) {
+    return showDialog<void>(
+        context: context,
+        barrierColor: colorBlack.withOpacity(0.85),
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return WillPopScope(
+              onWillPop: () async => false,
+              child: AlertDialog(
+                  key: _keyLoader,
+                  backgroundColor: Colors.transparent,
+                  contentPadding: const EdgeInsets.all(0),
+                  content: LoginAccountDialog(model: model,)));
         });
   }
 

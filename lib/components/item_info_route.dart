@@ -129,15 +129,19 @@ class _ItemInfoRoutesState extends State<ItemInfoRoutes> {
           itemToolTip(
               Assets.svg.removeFromPlaylist,
               LocaleKeys.removeFromPlaylist.tr(),
-              () => widget.moveToTopPlaylistCallback?.call()),
+              () => widget.removeFromPlaylistCallback?.call()),
           Divider(height: 0.08, color: colorWhite.withOpacity(0.4)),
           itemToolTip(Assets.svg.moveToTop, LocaleKeys.moveToTopPlaylist.tr(),
-              () => widget.moveToTopPlaylistCallback?.call()),
+              () => widget.moveToTopPlaylistCallback != null
+                  ? widget.moveToTopPlaylistCallback!.call()
+                  : null),
           Divider(height: 0.08, color: colorWhite.withOpacity(0.4)),
           itemToolTip(
               Assets.svg.moveToBottom,
               LocaleKeys.moveToBottomPlaylist.tr(),
-              () => widget.moveToBottomPlaylistCallback?.call()),
+              () => widget.moveToBottomPlaylistCallback != null
+                  ? widget.moveToBottomPlaylistCallback!.call()
+                  : null),
         ],
       ));
 

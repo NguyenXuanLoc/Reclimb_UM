@@ -104,7 +104,7 @@ const colorText7 = Color(0xfffff6f1);
 const colorText5 = Color(0xffEBEEF5);
 const colorText0 = Color(0xffffffff);
 
-const colorGreyBorder = Color(0xff909399);
+const colorGreyBorder = Color(0xffd7dadf);
 
 const colorBlueBackground = Color(0xffECF5FF);
 const colorBackgroundColor = Color(0xFF212121);

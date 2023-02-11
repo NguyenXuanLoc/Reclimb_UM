@@ -9,6 +9,7 @@ import 'package:base_bloc/localization/locale_keys.dart';
 import 'package:base_bloc/theme/app_styles.dart';
 import 'package:base_bloc/theme/colors.dart';
 import 'package:base_bloc/utils/app_utils.dart';
+import 'package:base_bloc/utils/log_utils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +20,10 @@ import '../gen/assets.gen.dart';
 
 class ItemUser extends StatefulWidget {
   final VoidCallback? logoutCallback;
+  final VoidCallback? loginCallback;
   final UserInfoModel model;
 
-  const ItemUser({Key? key, required this.model, this.logoutCallback})
+  const ItemUser({Key? key, required this.model, this.logoutCallback, this.loginCallback})
       : super(key: key);
 
   @override
@@ -59,11 +61,15 @@ class _ItemUserState extends State<ItemUser> {
   Widget contentToolTip() => GradientButton(
       onTap: () {
         widget.logoutCallback?.call();
+        isShowInfo = !isShowInfo;
         setState(() {});
       },
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
       widget: Row(mainAxisSize: MainAxisSize.min, children: [
-        SvgPicture.asset(Assets.svg.logout,width: 18.w,),
+        SvgPicture.asset(
+          Assets.svg.logout,
+          width: 18.w,
+        ),
         const SizedBox(width: 7),
         AppText(LocaleKeys.logout.tr(),
             style: typoW500.copyWith(
@@ -129,6 +135,7 @@ class _ItemUserState extends State<ItemUser> {
                     fontSize: 22.sp, color: colorText0.withOpacity(0.87)))
           ])),
       onTap: () {
+        widget.loginCallback?.call();
         Utils.fireEvent(DismissTooltipEvent());
         Timer(const Duration(milliseconds: 100),
             () => setState(() => isShowInfo = !isShowInfo));
