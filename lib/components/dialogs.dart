@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../config/app_nearby_service.dart';
 import '../data/model/info_user_model.dart';
-import 'LoginAccDialog.dart';
+import 'login_acc_dialog.dart';
 import 'app_text.dart';
 
 class Dialogs {

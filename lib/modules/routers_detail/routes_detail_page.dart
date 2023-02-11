@@ -64,7 +64,7 @@ class RoutesDetailPage extends StatefulWidget {
 
 class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
   late RoutesDetailCubit _bloc;
-  var sizeHoldSet = 10.6.h;
+  var sizeHoldSet = 12.6.h;
   var row = 47;
   var column = 12;
   var lHeight = [2, 4, 6, 8, 10, 12];
@@ -80,7 +80,7 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
   }
 
   void getHeightOfRoute() {
-    sizeHoldSet = 9.5.h;
+    sizeHoldSet = 11.5.h;
     if (widget.model.height != null) {
       row = widget.model.height! * 5;
       switch (widget.model.height) {
@@ -128,7 +128,7 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
                                   height: 18.h,
                                   color: HexColor('898989')),
                               SizedBox(
-                                  width: sizeHoldSet * column * 1.66,
+                                  width: sizeHoldSet * column * 1.75,
                                   child: Image.asset(Assets.png.tesst.path)),
                               Expanded(
                                   child: Stack(
@@ -202,7 +202,7 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
                                                       18),
                                               child: SvgPicture.asset(
                                                   Assets.svg.man,
-                                                  height: 65.h)))),
+                                                  height: 90.h)))),
                                   Positioned.fill(
                                       child: Align(
                                     alignment: Alignment.bottomLeft,
@@ -243,9 +243,10 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
       context: context,
       action: [
         Expanded(
-            child: Center(
-          child: AppText(
-            (widget.model.name ?? ''),
+            child: Container(
+                alignment: Alignment.centerLeft,
+                child: AppText(
+                  (widget.model.name ?? ''),
             style: typoW600.copyWith(
                 fontSize: 22.sp, color: colorText0.withOpacity(0.87)),
             maxLine: 1,
@@ -271,7 +272,7 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
       ]);
 
   Widget heightWidget(bool isLeft) => Container(
-      width: 8.w,
+      width: 14.w,
       height: row * sizeHoldSet,
       alignment: Alignment.center,
       decoration: BoxDecoration(gradient: gradientBackground()),
@@ -284,7 +285,7 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
               alignment: !isLeft ? Alignment.centerLeft : Alignment.centerRight,
               height: sizeHoldSet,
               child: AppText(' ${index + 1}',
-                  style: typoW400.copyWith(fontSize: 4.sp)))));
+                  style: typoW400.copyWith(fontSize: 6.sp)))));
 
   Widget wallWidget(BuildContext context, bool isLeft) => Stack(children: [
         Container(
@@ -294,7 +295,7 @@ class _RoutesDetailPageState extends BaseState<RoutesDetailPage> {
             child: Align(
                 alignment:
                     isLeft ? Alignment.centerLeft : Alignment.centerRight,
-                child: Container(width: 0.3.w, color: HexColor('FF5A00'))))
+                child: Container(width: 3.w, color: HexColor('FF5A00'))))
       ]);
 
   Widget infoRoutesWidget(BuildContext context, RoutesDetailState state) =>
