@@ -11,12 +11,14 @@ class HomeState extends Equatable {
   final List<UserInfoModel> lUserCache;
   final List<RoutesModel> lRoutes;
   final List<RoutesModel> lRoutesDrag;
+  final RoutesModel? currentRoute;
   final int? timeStamp;
 
   const HomeState(
       {this.type = StatusType.init,
       this.lRoutes = const [],
       this.timeStamp,
+      this.currentRoute,
       this.lRoutesDrag = const [],
       this.lUserLogin = const [],
       this.lUserCache = const []});
@@ -24,12 +26,14 @@ class HomeState extends Equatable {
   HomeState copyOf({
     StatusType? type,
     int? timeStamp,
+    RoutesModel? currentRoute,
     List<UserInfoModel>? lUserLogin,
     List<UserInfoModel>? lUserCache,
     List<RoutesModel>? lRoutes,
     List<RoutesModel>? lRoutesDrag,
   }) =>
       HomeState(
+        currentRoute: currentRoute,
         timeStamp: timeStamp ?? this.timeStamp,
         type: type ?? this.type,
         lUserLogin: lUserLogin ?? this.lUserLogin,
@@ -40,5 +44,5 @@ class HomeState extends Equatable {
 
   @override
   List<Object?> get props =>
-      [StatusType.init, lUserLogin, lUserCache, lRoutes, lRoutesDrag,timeStamp];
+      [StatusType.init, lUserLogin, lUserCache, lRoutes, lRoutesDrag,timeStamp,currentRoute];
 }

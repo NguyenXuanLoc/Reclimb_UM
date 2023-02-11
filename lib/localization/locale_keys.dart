@@ -57,4 +57,13 @@ abstract class LocaleKeys {
   static const please_input_valid_email = 'please_input_valid_email';
   static const please_input_email = 'please_input_email';
   static const please_input_valid_pass = 'please_input_valid_pass';
+
+  static const user = 'user';
+  static const popularity = 'popularity';
+  static const info = 'info';
+  static const today = 'today';
+  static const nextWeek = 'nextWeek';
+  static const tomorrow = 'tomorrow';
+  static const author = 'author';
+
 }

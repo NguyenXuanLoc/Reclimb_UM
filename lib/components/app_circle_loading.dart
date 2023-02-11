@@ -11,7 +11,7 @@ class AppCircleLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 30.w,
-      height: 30.h,
+      height: 30.w,
       child: const CircularProgressIndicator(
         color: colorOrange110,
         strokeWidth: 2.0,

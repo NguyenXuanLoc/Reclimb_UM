@@ -10,6 +10,9 @@ import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:matrix2d/matrix2d.dart';
 
+import '../data/model/holds_param.dart';
+import '../modules/routers_detail/hold_set_model.dart';
+
 class Utils {
   static var METHOD_CHANNEL = "METHOD_CALL_NATIVE";
   static var eventBus = EventBus();
@@ -451,6 +454,54 @@ class Utils {
       default:
         return 0;
     }
+  }
+  static List<HoldParam> getHold(dynamic holds) {
+    try {
+      var lResponse =
+      holdParamFromJson(json.decode((holds).replaceAll("'", "\"")));
+      for (int i = 0; i < lResponse.length; i++) {
+        lResponse[i].index = getPosition(lResponse[i].x, lResponse[i].y, 12);
+        lResponse[i].imageUrl ='${ConstantKey.BASE_URL}hold/${lResponse[i].hid}/image';
+        lResponse[i].rotate = getRotateByDirection(lResponse[i].d);
+      }
+      return lResponse;
+    } catch (ex) {
+      return [];
+    }
+  }
+
+  static List<HoldParam> getHoldsParam(List<HoldSetModel> lRoutes, int row,
+      int column) {
+    var lHolds = <HoldParam>[];
+    var lRequest = [lRoutes].reshape(row, column);
+    for (int x = 0; x < lRequest.length; x++) {
+      for (int y = 0; y < lRequest[x].length; y++) {
+        if (lRequest[x][y].fileName != null) {
+          var direction = '';
+          switch (lRequest[x][y].rotate) {
+            case 0:
+            case 4:
+            case -4:
+              direction = 'N'; //TREN
+              break;
+            case 1:
+            case -1:
+              direction = 'E'; // TRAI
+              break;
+            case 2:
+            case -2:
+              direction = 'S'; // DUOI
+              break;
+            case 3:
+            case -3:
+              direction = 'M'; // PHAI
+              break;
+          }
+          lHolds.add(HoldParam(y, x, lRequest[x][y].id ?? 0, direction));
+        }
+      }
+    }
+    return lHolds;
   }
   static bool checkDiacriticsForEmail(String email) =>
       removeDiacritics(email) == email ? false : true;

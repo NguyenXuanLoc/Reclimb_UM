@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:base_bloc/base/base_cubit.dart';
+import 'package:base_bloc/data/eventbus/dismiss_tooltip_event.dart';
 import 'package:base_bloc/data/model/info_user_model.dart';
 import 'package:base_bloc/data/model/routes_model.dart';
 import 'package:base_bloc/data/nearby/nearby_data.dart';
@@ -8,13 +9,17 @@ import 'package:base_bloc/data/nearby/nearby_ext.dart';
 import 'package:base_bloc/modules/home/home_state.dart';
 import 'package:base_bloc/router/router.dart';
 import 'package:base_bloc/router/router_utils.dart';
+import 'package:base_bloc/utils/log_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 import '../../data/fake_data.dart';
+import '../../utils/app_utils.dart';
+import '../routers_detail/routes_detail_page.dart';
 
 class HomeCubit extends BaseCubit<HomeState> {
-  HomeCubit() : super(const HomeState()) {
+  final RoutesDetailController routesDetailController;
+  HomeCubit(this.routesDetailController) : super(const HomeState()) {
     emit(HomeState(lUserLogin: lUserFake(), lUserCache: lUserCache()));
     getRoutes();
   }
@@ -67,4 +72,15 @@ class HomeCubit extends BaseCubit<HomeState> {
     emit(state.copyOf(lRoutes: lResponse));
   }
 
+  void itemRouteOnClick(RoutesModel model) {
+    emit(state.copyOf(currentRoute: model));
+    routesDetailController.setRoutes = model;
+    Utils.fireEvent(DismissTooltipEvent());
+  }
+
+  void dismissRouteDetail() {
+    logE("TAG DIS MISS");
+    // emit(HomeState());
+    emit(state.copyOf(timeStamp: DateTime.now().microsecondsSinceEpoch,currentRoute: null));
+  }
 }
